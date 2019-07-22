@@ -6,7 +6,7 @@ license = "MIT/Apache-2.0"
 
 description = "The FFI bindings for libgoa."
 repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs"
-categories = ["external-api-bindings"]
+categories = ["external-ffi-bindings"]
 keywords = ["GNOME", "online", "accounts", "bindings"]
 
 edition = "2015"
