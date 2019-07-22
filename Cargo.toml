@@ -1,0 +1,48 @@
+[package]
+name = "goa"
+version = "0.0.1"
+authors = ["Boiethios <felix-libgoa@daudre-vignier.fr>"]
+license = "MIT/Apache-2.0"
+
+description = "The bindings for libgoa."
+repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs"
+categories = ["api-bindings", "authentication", "configuration", "os::unix-apis"]
+keywords = ["GNOME", "online", "accounts", "bindings"]
+readme = "README.md"
+
+edition = "2015"
+links = "goa-1.0"
+
+[badges]
+gitlab = { repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs" }
+
+[dependencies]
+libc = "0.2"
+bitflags = "1.0"
+fragile = "0.3"
+
+glib = "0.8"
+gio = "0.7"
+
+gio-sys = "0.9"
+glib-sys = "0.9"
+gobject-sys = "0.9"
+
+[dependencies.goa-sys]
+path = "./goa-sys"
+
+[dev-dependencies]
+tokio = { git = "https://github.com/tokio-rs/tokio" }
+
+[features]
+default = ["futures", "v3_6", "v3_8", "v3_12", "v3_14", "v3_16", "v3_18", "v3_26"]
+
+v3_6 = ["goa-sys/v3_6"]
+v3_8 = ["v3_6", "goa-sys/v3_8"]
+v3_12 = ["v3_8", "goa-sys/v3_12"]
+v3_14 = ["v3_12", "goa-sys/v3_14"]
+v3_16 = ["v3_14", "goa-sys/v3_16"]
+v3_18 = ["v3_16", "goa-sys/v3_18"]
+v3_26 = ["v3_18", "goa-sys/v3_26"]
+futures = ["gio/futures"]
+dox = []

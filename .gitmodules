@@ -1,0 +1,6 @@
+[submodule "vala-girs"]
+	path = vala-girs
+	url = https://github.com/nemequ/vala-girs/
+[submodule "gir-files"]
+	path = gir-files
+	url = https://github.com/nemequ/vala-girs

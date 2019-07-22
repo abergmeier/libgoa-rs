@@ -1,0 +1,13 @@
+[options]
+library = "Goa"
+version = "1.0"
+min_cfg_version = "1.0"
+target_path = "."
+work_mode = "sys"
+girs_dir = "../gir-files/gir-1.0"
+
+external_libraries = [
+    "Gio",
+    "GLib",
+    "GObject",
+]
