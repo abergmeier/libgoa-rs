@@ -30,6 +30,7 @@ gobject-sys = "0.9"
 
 [dependencies.goa-sys]
 path = "./goa-sys"
+version = "0.0.1"
 
 [dev-dependencies]
 tokio = { git = "https://github.com/tokio-rs/tokio" }
