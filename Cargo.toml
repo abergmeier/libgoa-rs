@@ -1,11 +1,13 @@
 [package]
 name = "goa"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Boiethios <felix-libgoa@daudre-vignier.fr>"]
 license = "MIT/Apache-2.0"
 
 description = "The bindings for the GNOME Online Accounts library."
 repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs"
+documentation = "https://docs.rs/goa"
+homepage = "https://developer.gnome.org/goa/stable/index.html"
 categories = ["api-bindings", "authentication", "config", "os::unix-apis"]
 keywords = ["GNOME", "online", "accounts", "bindings"]
 readme = "README.md"
