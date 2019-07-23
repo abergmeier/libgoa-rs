@@ -4,7 +4,7 @@ version = "0.0.2"
 authors = ["Boiethios <felix-libgoa@daudre-vignier.fr>"]
 license = "MIT/Apache-2.0"
 
-description = "The bindings for libgoa."
+description = "The bindings for the GNOME Online Accounts library."
 repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs"
 categories = ["api-bindings", "authentication", "config", "os::unix-apis"]
 keywords = ["GNOME", "online", "accounts", "bindings"]
@@ -32,7 +32,7 @@ gobject-sys = "0.9"
 
 [dependencies.goa-sys]
 path = "./goa-sys"
-version = "0.0.2"
+version = "0.0.3"
 
 #[dev-dependencies]
 #tokio = { git = "https://github.com/tokio-rs/tokio" }
@@ -49,3 +49,7 @@ v3_18 = ["v3_16", "goa-sys/v3_18"]
 v3_26 = ["v3_18", "goa-sys/v3_26"]
 futures = ["gio/futures"]
 dox = ["goa-sys/dox"]
+docs-rs = ["goa-sys/docs-rs"]
+
+[package.metadata.docs.rs]
+features = [ "docs-rs" ]

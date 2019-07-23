@@ -1,10 +1,10 @@
 [package]
 name = "goa-sys"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Boiethios <felix-libgoa@daudre-vignier.fr>"]
 license = "MIT/Apache-2.0"
 
-description = "The FFI bindings for libgoa."
+description = "The FFI bindings for the GNOME Online Accounts library."
 repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs"
 documentation = "https://docs.rs/goa-sys"
 categories = ["external-ffi-bindings"]
@@ -39,6 +39,7 @@ v3_16 = ["v3_14"]
 v3_18 = ["v3_16"]
 v3_26 = ["v3_18"]
 dox = []
+docs-rs = []
 
 [package.metadata.docs.rs]
 features = [ "docs-rs" ]
