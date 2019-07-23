@@ -1,6 +1,6 @@
 [package]
 name = "goa"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Boiethios <felix-libgoa@daudre-vignier.fr>"]
 license = "MIT/Apache-2.0"
 
@@ -10,7 +10,7 @@ categories = ["api-bindings", "authentication", "config", "os::unix-apis"]
 keywords = ["GNOME", "online", "accounts", "bindings"]
 readme = "README.md"
 
-exclude = ["gir-files/**/*"]
+exclude = ["gir-files/*"]
 
 edition = "2015"
 links = "goa-1.0"
@@ -32,7 +32,7 @@ gobject-sys = "0.9"
 
 [dependencies.goa-sys]
 path = "./goa-sys"
-version = "0.0.1"
+version = "0.0.2"
 
 #[dev-dependencies]
 #tokio = { git = "https://github.com/tokio-rs/tokio" }
@@ -48,4 +48,4 @@ v3_16 = ["v3_14", "goa-sys/v3_16"]
 v3_18 = ["v3_16", "goa-sys/v3_18"]
 v3_26 = ["v3_18", "goa-sys/v3_26"]
 futures = ["gio/futures"]
-dox = []
+dox = ["goa-sys/dox"]

@@ -10,6 +10,10 @@ use std::io::prelude::*;
 use std::io;
 use std::process;
 
+#[cfg(feature = "docs-rs")]
+fn main() {} // Skip the script when the doc is building
+
+#[cfg(not(feature = "docs-rs"))]
 fn main() {
     if let Err(s) = find() {
         let _ = writeln!(io::stderr(), "{}", s);
