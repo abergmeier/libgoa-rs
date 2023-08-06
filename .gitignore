@@ -1,4 +1,3 @@
 target
 goa-sys/target
-**/*.rs.bk
 Cargo.lock

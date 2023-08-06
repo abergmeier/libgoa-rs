@@ -1,6 +1,8 @@
-[submodule "vala-girs"]
-	path = vala-girs
-	url = https://github.com/nemequ/vala-girs/
+[submodule "gir"]
+	path = gir
+	url = https://github.com/gtk-rs/gir
+	update = none
 [submodule "gir-files"]
 	path = gir-files
-	url = https://github.com/nemequ/vala-girs
+	url = https://github.com/gtk-rs/gir-files
+	update = none
