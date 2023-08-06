@@ -4,16 +4,15 @@ version = "1.0"
 min_cfg_version = "1.0"
 target_path = "."
 work_mode = "normal"
-girs_dir = "gir-files/gir-1.0"
+girs_directories = ["../gir-files", ".."]
 
-#generate_safety_asserts = true
+generate_safety_asserts = true
 deprecate_by_min_version = true
 single_version_file = true
 
 generate = [
     "Goa.Client",
     "Goa.Error",
-    "Goa.Object",
     "Goa.ObjectManagerClient",
     "Goa.Manager",
     "Goa.Account",
@@ -37,8 +36,9 @@ generate = [
     "Goa.Printers",
 ]
 
-manual = [
-    "GLib.Error",
-    "Gio.AsyncReadyCallback",
-    "Gio.Cancellable",
-]
+manual = ["GLib.Error", "Gio.Cancellable"]
+
+[[object]]
+name = "Goa.Object"
+status = "generate"
+trait_name = "GoaObjectExt" # Conflicts with glib::ObjectExt

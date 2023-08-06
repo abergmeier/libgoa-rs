@@ -3,14 +3,13 @@ name = "goa-sys"
 version = "0.0.3"
 authors = ["Boiethios <felix-libgoa@daudre-vignier.fr>"]
 license = "MIT/Apache-2.0"
-
 description = "The FFI bindings for the GNOME Online Accounts library."
 repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs"
 documentation = "https://docs.rs/goa-sys"
 categories = ["external-ffi-bindings"]
 keywords = ["GNOME", "online", "accounts", "bindings"]
-
-edition = "2015"
+edition = "2021"
+build = "build.rs"
 links = "goa"
 
 [lib]
@@ -19,16 +18,21 @@ name = "goa_sys"
 [dependencies]
 libc = "0.2"
 
-gio-sys = "0.9"
-glib-sys = "0.9"
-gobject-sys = "0.9"
+[dependencies.gio]
+package = "gio-sys"
+version = "0.18"
+
+[dependencies.glib]
+package = "glib-sys"
+version = "0.18"
+
+[dependencies.gobject]
+package = "gobject-sys"
+version = "0.18"
 
 [build-dependencies]
-pkg-config = "0.3.7"
 
 [dev-dependencies]
-shell-words = "0.1.0"
-tempdir = "0.3"
 
 [features]
 v3_6 = []
@@ -38,8 +42,3 @@ v3_14 = ["v3_12"]
 v3_16 = ["v3_14"]
 v3_18 = ["v3_16"]
 v3_26 = ["v3_18"]
-dox = []
-docs-rs = []
-
-[package.metadata.docs.rs]
-features = [ "docs-rs" ]
