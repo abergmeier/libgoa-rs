@@ -12,6 +12,36 @@ edition = "2021"
 build = "build.rs"
 links = "goa"
 
+[package.metadata.system-deps.goa_1_0]
+name = "goa-1.0"
+version = "1"
+
+[package.metadata.system-deps.goa_1_0.v3_6]
+version = "3.6"
+
+[package.metadata.system-deps.goa_1_0.v3_8]
+version = "3.8"
+
+[package.metadata.system-deps.goa_1_0.v3_12]
+version = "3.12"
+
+[package.metadata.system-deps.goa_1_0.v3_14]
+version = "3.14"
+
+[package.metadata.system-deps.goa_1_0.v3_16]
+version = "3.16"
+
+[package.metadata.system-deps.goa_1_0.v3_18]
+version = "3.18"
+
+[package.metadata.system-deps.goa_1_0.v3_26]
+version = "3.26"
+
+[package.metadata.docs.rs]
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
+all-features = "true"
+
 [lib]
 name = "goa_sys"
 
@@ -31,8 +61,11 @@ package = "gobject-sys"
 version = "0.18"
 
 [build-dependencies]
+system-deps = "6"
 
 [dev-dependencies]
+shell-words = "1.0.0"
+tempfile = "3"
 
 [features]
 v3_6 = []
