@@ -1,0 +1,12 @@
+[options]
+library = "Goa"
+version = "1.0"
+min_cfg_version = "1.0"
+target_path = "."
+work_mode = "sys"
+girs_directories = ["../../gir-files", "../.."]
+single_version_file = true
+
+ignore = ["Goa.MAJOR_VERSION", "Goa.MICRO_VERSION", "Goa.MINOR_VERSION"]
+
+external_libraries = ["Gio", "GLib", "GObject"]

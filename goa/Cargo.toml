@@ -1,0 +1,37 @@
+[package]
+name = "goa"
+version = "0.0.3"
+authors = ["Boiethios <felix-libgoa@daudre-vignier.fr>"]
+license = "MIT/Apache-2.0"
+description = "The bindings for the GNOME Online Accounts library."
+repository = "https://gitlab.gnome.org/World/Rust/libgoa-rs"
+documentation = "https://docs.rs/goa"
+homepage = "https://developer.gnome.org/goa/stable/index.html"
+categories = ["api-bindings", "authentication", "config", "os::unix-apis"]
+keywords = ["GNOME", "online", "accounts", "bindings"]
+readme = "README.md"
+edition = "2021"
+
+
+[package.metadata.docs.rs]
+all-features = "true"
+rustc-args = ["--cfg", "docsrs"]
+rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
+
+[dependencies]
+libc = "0.2.122"
+bitflags = "2.0"
+ffi = { package = "goa-sys", path = "./goa-sys", version = "0.0.3" }
+gio = "0.18"
+gio-sys = "0.18"
+glib = "0.18"
+gobject-sys = "0.18"
+
+[features]
+v3_6 = ["ffi/v3_6"]
+v3_8 = ["ffi/v3_8", "v3_6"]
+v3_12 = ["ffi/v3_12", "v3_8"]
+v3_14 = ["ffi/v3_14", "v3_12"]
+v3_16 = ["ffi/v3_16", "v3_14"]
+v3_18 = ["ffi/v3_18", "v3_16"]
+v3_26 = ["ffi/v3_26", "v3_18"]

@@ -1,0 +1,44 @@
+[options]
+library = "Goa"
+version = "1.0"
+min_cfg_version = "1.0"
+target_path = "."
+work_mode = "normal"
+girs_directories = ["../gir-files", ".."]
+
+generate_safety_asserts = true
+deprecate_by_min_version = true
+single_version_file = true
+
+generate = [
+    "Goa.Client",
+    "Goa.Error",
+    "Goa.ObjectManagerClient",
+    "Goa.Manager",
+    "Goa.Account",
+    "Goa.OAuthBased",
+    "Goa.OAuth2Based",
+    "Goa.PasswordBased",
+    "Goa.Mail",
+    "Goa.Calendar",
+    "Goa.Contacts",
+    "Goa.Chat",
+    "Goa.Documents",
+    "Goa.Maps",
+    "Goa.Music",
+    "Goa.Photos",
+    "Goa.Files",
+    "Goa.Exchange",
+    "Goa.MediaServer",
+    "Goa.Ticketing",
+    "Goa.Todo",
+    "Goa.ReadLater",
+    "Goa.Printers",
+]
+
+manual = ["GLib.Error", "Gio.Cancellable"]
+
+[[object]]
+name = "Goa.Object"
+status = "generate"
+trait_name = "GoaObjectExt" # Conflicts with glib::ObjectExt
