@@ -4,7 +4,7 @@
 // DO NOT EDIT
 
 use glib::{prelude::*,signal::{connect_raw, SignalHandlerId},translate::*};
-use std::{boxed::Box as Box_,fmt,mem::transmute};
+use std::{boxed::Box as Box_};
 
 glib::wrapper! {
     #[doc(alias = "GoaMail")]
@@ -395,7 +395,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::email-address\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_email_address_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_email_address_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -410,7 +410,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::imap-accept-ssl-errors\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_imap_accept_ssl_errors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_imap_accept_ssl_errors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -423,7 +423,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::imap-host\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_imap_host_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_imap_host_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -436,7 +436,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::imap-supported\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_imap_supported_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_imap_supported_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -451,7 +451,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::imap-use-ssl\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_imap_use_ssl_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_imap_use_ssl_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -464,7 +464,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::imap-use-tls\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_imap_use_tls_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_imap_use_tls_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -477,7 +477,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::imap-user-name\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_imap_user_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_imap_user_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -492,7 +492,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::name\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -507,7 +507,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-accept-ssl-errors\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_accept_ssl_errors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_accept_ssl_errors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -522,7 +522,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-auth-login\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_auth_login_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_auth_login_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -537,7 +537,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-auth-plain\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_auth_plain_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_auth_plain_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -552,7 +552,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-auth-xoauth2\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_auth_xoauth2_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_auth_xoauth2_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -565,7 +565,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-host\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_host_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_host_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -578,7 +578,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-supported\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_supported_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_supported_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -593,7 +593,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-use-auth\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_use_auth_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_use_auth_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -608,7 +608,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-use-ssl\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_use_ssl_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_use_ssl_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -621,7 +621,7 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-use-tls\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_use_tls_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_use_tls_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -634,15 +634,9 @@ pub trait MailExt: IsA<Mail> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::smtp-user-name\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_smtp_user_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_smtp_user_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl<O: IsA<Mail>> MailExt for O {}
-
-impl fmt::Display for Mail {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Mail")
-    }
-}

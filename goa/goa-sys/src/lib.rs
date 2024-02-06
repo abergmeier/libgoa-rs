@@ -7,6 +7,9 @@
 #![allow(clippy::approx_constant, clippy::type_complexity, clippy::unreadable_literal, clippy::upper_case_acronyms)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+use gio_sys as gio;
+use glib_sys as glib;
+use gobject_sys as gobject;
 
 #[allow(unused_imports)]
 use libc::{c_int, c_char, c_uchar, c_float, c_uint, c_double,
@@ -111,7 +114,7 @@ pub struct _GoaAccountProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaAccountProxyPrivate = *mut _GoaAccountProxyPrivate;
+pub type GoaAccountProxyPrivate = _GoaAccountProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -133,7 +136,7 @@ pub struct _GoaAccountSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaAccountSkeletonPrivate = *mut _GoaAccountSkeletonPrivate;
+pub type GoaAccountSkeletonPrivate = _GoaAccountSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -173,7 +176,7 @@ pub struct _GoaCalendarProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaCalendarProxyPrivate = *mut _GoaCalendarProxyPrivate;
+pub type GoaCalendarProxyPrivate = _GoaCalendarProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -195,7 +198,7 @@ pub struct _GoaCalendarSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaCalendarSkeletonPrivate = *mut _GoaCalendarSkeletonPrivate;
+pub type GoaCalendarSkeletonPrivate = _GoaCalendarSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -231,7 +234,7 @@ pub struct _GoaChatProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaChatProxyPrivate = *mut _GoaChatProxyPrivate;
+pub type GoaChatProxyPrivate = _GoaChatProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -253,7 +256,7 @@ pub struct _GoaChatSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaChatSkeletonPrivate = *mut _GoaChatSkeletonPrivate;
+pub type GoaChatSkeletonPrivate = _GoaChatSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -307,7 +310,7 @@ pub struct _GoaContactsProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaContactsProxyPrivate = *mut _GoaContactsProxyPrivate;
+pub type GoaContactsProxyPrivate = _GoaContactsProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -329,7 +332,7 @@ pub struct _GoaContactsSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaContactsSkeletonPrivate = *mut _GoaContactsSkeletonPrivate;
+pub type GoaContactsSkeletonPrivate = _GoaContactsSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -365,7 +368,7 @@ pub struct _GoaDocumentsProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaDocumentsProxyPrivate = *mut _GoaDocumentsProxyPrivate;
+pub type GoaDocumentsProxyPrivate = _GoaDocumentsProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -387,7 +390,7 @@ pub struct _GoaDocumentsSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaDocumentsSkeletonPrivate = *mut _GoaDocumentsSkeletonPrivate;
+pub type GoaDocumentsSkeletonPrivate = _GoaDocumentsSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -427,7 +430,7 @@ pub struct _GoaExchangeProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaExchangeProxyPrivate = *mut _GoaExchangeProxyPrivate;
+pub type GoaExchangeProxyPrivate = _GoaExchangeProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -449,7 +452,7 @@ pub struct _GoaExchangeSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaExchangeSkeletonPrivate = *mut _GoaExchangeSkeletonPrivate;
+pub type GoaExchangeSkeletonPrivate = _GoaExchangeSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -489,7 +492,7 @@ pub struct _GoaFilesProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaFilesProxyPrivate = *mut _GoaFilesProxyPrivate;
+pub type GoaFilesProxyPrivate = _GoaFilesProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -511,7 +514,7 @@ pub struct _GoaFilesSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaFilesSkeletonPrivate = *mut _GoaFilesSkeletonPrivate;
+pub type GoaFilesSkeletonPrivate = _GoaFilesSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -583,7 +586,7 @@ pub struct _GoaMailProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMailProxyPrivate = *mut _GoaMailProxyPrivate;
+pub type GoaMailProxyPrivate = _GoaMailProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -605,7 +608,7 @@ pub struct _GoaMailSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMailSkeletonPrivate = *mut _GoaMailSkeletonPrivate;
+pub type GoaMailSkeletonPrivate = _GoaMailSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -645,7 +648,7 @@ pub struct _GoaManagerProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaManagerProxyPrivate = *mut _GoaManagerProxyPrivate;
+pub type GoaManagerProxyPrivate = _GoaManagerProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -667,7 +670,7 @@ pub struct _GoaManagerSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaManagerSkeletonPrivate = *mut _GoaManagerSkeletonPrivate;
+pub type GoaManagerSkeletonPrivate = _GoaManagerSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -703,7 +706,7 @@ pub struct _GoaMapsProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMapsProxyPrivate = *mut _GoaMapsProxyPrivate;
+pub type GoaMapsProxyPrivate = _GoaMapsProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -725,7 +728,7 @@ pub struct _GoaMapsSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMapsSkeletonPrivate = *mut _GoaMapsSkeletonPrivate;
+pub type GoaMapsSkeletonPrivate = _GoaMapsSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -765,7 +768,7 @@ pub struct _GoaMediaServerProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMediaServerProxyPrivate = *mut _GoaMediaServerProxyPrivate;
+pub type GoaMediaServerProxyPrivate = _GoaMediaServerProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -787,7 +790,7 @@ pub struct _GoaMediaServerSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMediaServerSkeletonPrivate = *mut _GoaMediaServerSkeletonPrivate;
+pub type GoaMediaServerSkeletonPrivate = _GoaMediaServerSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -823,7 +826,7 @@ pub struct _GoaMusicProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMusicProxyPrivate = *mut _GoaMusicProxyPrivate;
+pub type GoaMusicProxyPrivate = _GoaMusicProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -845,7 +848,7 @@ pub struct _GoaMusicSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaMusicSkeletonPrivate = *mut _GoaMusicSkeletonPrivate;
+pub type GoaMusicSkeletonPrivate = _GoaMusicSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -887,7 +890,7 @@ pub struct _GoaOAuth2BasedProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaOAuth2BasedProxyPrivate = *mut _GoaOAuth2BasedProxyPrivate;
+pub type GoaOAuth2BasedProxyPrivate = _GoaOAuth2BasedProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -909,7 +912,7 @@ pub struct _GoaOAuth2BasedSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaOAuth2BasedSkeletonPrivate = *mut _GoaOAuth2BasedSkeletonPrivate;
+pub type GoaOAuth2BasedSkeletonPrivate = _GoaOAuth2BasedSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -951,7 +954,7 @@ pub struct _GoaOAuthBasedProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaOAuthBasedProxyPrivate = *mut _GoaOAuthBasedProxyPrivate;
+pub type GoaOAuthBasedProxyPrivate = _GoaOAuthBasedProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -973,7 +976,7 @@ pub struct _GoaOAuthBasedSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaOAuthBasedSkeletonPrivate = *mut _GoaOAuthBasedSkeletonPrivate;
+pub type GoaOAuthBasedSkeletonPrivate = _GoaOAuthBasedSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1009,7 +1012,7 @@ pub struct _GoaObjectManagerClientPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaObjectManagerClientPrivate = *mut _GoaObjectManagerClientPrivate;
+pub type GoaObjectManagerClientPrivate = _GoaObjectManagerClientPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1031,7 +1034,7 @@ pub struct _GoaObjectProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaObjectProxyPrivate = *mut _GoaObjectProxyPrivate;
+pub type GoaObjectProxyPrivate = _GoaObjectProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1053,7 +1056,7 @@ pub struct _GoaObjectSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaObjectSkeletonPrivate = *mut _GoaObjectSkeletonPrivate;
+pub type GoaObjectSkeletonPrivate = _GoaObjectSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1091,7 +1094,7 @@ pub struct _GoaPasswordBasedProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaPasswordBasedProxyPrivate = *mut _GoaPasswordBasedProxyPrivate;
+pub type GoaPasswordBasedProxyPrivate = _GoaPasswordBasedProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1113,7 +1116,7 @@ pub struct _GoaPasswordBasedSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaPasswordBasedSkeletonPrivate = *mut _GoaPasswordBasedSkeletonPrivate;
+pub type GoaPasswordBasedSkeletonPrivate = _GoaPasswordBasedSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1149,7 +1152,7 @@ pub struct _GoaPhotosProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaPhotosProxyPrivate = *mut _GoaPhotosProxyPrivate;
+pub type GoaPhotosProxyPrivate = _GoaPhotosProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1171,7 +1174,7 @@ pub struct _GoaPhotosSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaPhotosSkeletonPrivate = *mut _GoaPhotosSkeletonPrivate;
+pub type GoaPhotosSkeletonPrivate = _GoaPhotosSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1207,7 +1210,7 @@ pub struct _GoaPrintersProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaPrintersProxyPrivate = *mut _GoaPrintersProxyPrivate;
+pub type GoaPrintersProxyPrivate = _GoaPrintersProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1229,7 +1232,7 @@ pub struct _GoaPrintersSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaPrintersSkeletonPrivate = *mut _GoaPrintersSkeletonPrivate;
+pub type GoaPrintersSkeletonPrivate = _GoaPrintersSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1265,7 +1268,7 @@ pub struct _GoaReadLaterProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaReadLaterProxyPrivate = *mut _GoaReadLaterProxyPrivate;
+pub type GoaReadLaterProxyPrivate = _GoaReadLaterProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1287,7 +1290,7 @@ pub struct _GoaReadLaterSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaReadLaterSkeletonPrivate = *mut _GoaReadLaterSkeletonPrivate;
+pub type GoaReadLaterSkeletonPrivate = _GoaReadLaterSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1327,7 +1330,7 @@ pub struct _GoaTicketingProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaTicketingProxyPrivate = *mut _GoaTicketingProxyPrivate;
+pub type GoaTicketingProxyPrivate = _GoaTicketingProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1349,7 +1352,7 @@ pub struct _GoaTicketingSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaTicketingSkeletonPrivate = *mut _GoaTicketingSkeletonPrivate;
+pub type GoaTicketingSkeletonPrivate = _GoaTicketingSkeletonPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1385,7 +1388,7 @@ pub struct _GoaTodoProxyPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaTodoProxyPrivate = *mut _GoaTodoProxyPrivate;
+pub type GoaTodoProxyPrivate = _GoaTodoProxyPrivate;
 
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1407,7 +1410,7 @@ pub struct _GoaTodoSkeletonPrivate {
     _marker: core::marker::PhantomData<(*mut u8, core::marker::PhantomPinned)>,
 }
 
-pub type GoaTodoSkeletonPrivate = *mut _GoaTodoSkeletonPrivate;
+pub type GoaTodoSkeletonPrivate = _GoaTodoSkeletonPrivate;
 
 // Classes
 #[derive(Copy, Clone)]

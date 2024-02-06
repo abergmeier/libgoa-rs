@@ -5,7 +5,7 @@
 
 use crate::{Manager,Object};
 use glib::{prelude::*,signal::{connect_raw, SignalHandlerId},translate::*};
-use std::{boxed::Box as Box_,fmt,mem::transmute,pin::Pin,ptr};
+use std::{boxed::Box as Box_,pin::Pin};
 
 glib::wrapper! {
     #[doc(alias = "GoaClient")]
@@ -21,7 +21,7 @@ impl Client {
     pub fn new_sync(cancellable: Option<&impl IsA<gio::Cancellable>>) -> Result<Client, glib::Error> {
         assert_initialized_main_thread!();
         unsafe {
-            let mut error = ptr::null_mut();
+            let mut error = std::ptr::null_mut();
             let ret = ffi::goa_client_new_sync(cancellable.map(|p| p.as_ref()).to_glib_none().0, &mut error);
             if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) }
         }
@@ -74,7 +74,7 @@ impl Client {
         
         let user_data: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::new(glib::thread_guard::ThreadGuard::new(callback));
         unsafe extern "C" fn new_trampoline<P: FnOnce(Result<Client, glib::Error>) + 'static>(_source_object: *mut glib::gobject_ffi::GObject, res: *mut gio::ffi::GAsyncResult, user_data: glib::ffi::gpointer) {
-            let mut error = ptr::null_mut();
+            let mut error = std::ptr::null_mut();
             let ret = ffi::goa_client_new_finish(res, &mut error);
             let result = if error.is_null() { Ok(from_glib_full(ret)) } else { Err(from_glib_full(error)) };
             let callback: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::from_raw(user_data as *mut _);
@@ -110,7 +110,7 @@ impl Client {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"account-added\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(account_added_trampoline::<F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(account_added_trampoline::<F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -123,7 +123,7 @@ impl Client {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"account-changed\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(account_changed_trampoline::<F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(account_changed_trampoline::<F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -136,7 +136,7 @@ impl Client {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"account-removed\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(account_removed_trampoline::<F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(account_removed_trampoline::<F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -149,13 +149,7 @@ impl Client {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::object-manager\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_object_manager_trampoline::<F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_object_manager_trampoline::<F> as *const ())), Box_::into_raw(f))
         }
-    }
-}
-
-impl fmt::Display for Client {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Client")
     }
 }

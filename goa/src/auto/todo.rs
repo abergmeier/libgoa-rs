@@ -4,7 +4,6 @@
 // DO NOT EDIT
 
 use glib::{prelude::*};
-use std::{fmt};
 
 glib::wrapper! {
     #[doc(alias = "GoaTodo")]
@@ -38,9 +37,3 @@ mod sealed {
 pub trait TodoExt: IsA<Todo> + sealed::Sealed + 'static {}
 
 impl<O: IsA<Todo>> TodoExt for O {}
-
-impl fmt::Display for Todo {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Todo")
-    }
-}

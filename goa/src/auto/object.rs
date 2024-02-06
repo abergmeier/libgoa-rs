@@ -23,7 +23,7 @@ use crate::{Music};
 #[cfg_attr(docsrs, doc(cfg(feature = "v3_26")))]
 use crate::{Todo};
 use glib::{prelude::*,signal::{connect_raw, SignalHandlerId},translate::*};
-use std::{boxed::Box as Box_,fmt,mem::transmute};
+use std::{boxed::Box as Box_};
 
 glib::wrapper! {
     #[doc(alias = "GoaObject")]
@@ -505,7 +505,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::account\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_account_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_account_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -518,7 +518,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::calendar\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_calendar_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_calendar_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -531,7 +531,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::chat\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_chat_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_chat_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -544,7 +544,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::contacts\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_contacts_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_contacts_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -557,7 +557,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::documents\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_documents_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_documents_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -572,7 +572,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::exchange\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_exchange_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_exchange_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -587,7 +587,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::files\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_files_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_files_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -600,7 +600,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::mail\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_mail_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_mail_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -613,7 +613,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::manager\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_manager_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_manager_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -628,7 +628,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::maps\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_maps_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_maps_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -643,7 +643,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::media-server\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_media_server_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_media_server_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -658,7 +658,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::music\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_music_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_music_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -671,7 +671,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::oauth-based\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_oauth_based_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_oauth_based_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -684,7 +684,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::oauth2-based\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_oauth2_based_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_oauth2_based_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -699,7 +699,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::password-based\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_password_based_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_password_based_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -714,7 +714,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::photos\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_photos_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_photos_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -729,7 +729,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::printers\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_printers_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_printers_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -744,7 +744,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::read-later\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_read_later_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_read_later_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -759,7 +759,7 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ticketing\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_ticketing_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_ticketing_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -774,15 +774,9 @@ pub trait GoaObjectExt: IsA<Object> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::todo\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_todo_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_todo_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl<O: IsA<Object>> GoaObjectExt for O {}
-
-impl fmt::Display for Object {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Object")
-    }
-}

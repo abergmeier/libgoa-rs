@@ -4,7 +4,7 @@
 // DO NOT EDIT
 
 use glib::{prelude::*,translate::*};
-use std::{boxed::Box as Box_,fmt,mem,pin::Pin,ptr};
+use std::{boxed::Box as Box_,pin::Pin};
 
 glib::wrapper! {
     #[doc(alias = "GoaManager")]
@@ -84,8 +84,8 @@ pub trait ManagerExt: IsA<Manager> + sealed::Sealed + 'static {
         
         let user_data: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::new(glib::thread_guard::ThreadGuard::new(callback));
         unsafe extern "C" fn call_is_supported_provider_trampoline<P: FnOnce(Result<bool, glib::Error>) + 'static>(_source_object: *mut glib::gobject_ffi::GObject, res: *mut gio::ffi::GAsyncResult, user_data: glib::ffi::gpointer) {
-            let mut error = ptr::null_mut();
-            let mut out_is_supported = mem::MaybeUninit::uninit();
+            let mut error = std::ptr::null_mut();
+            let mut out_is_supported = std::mem::MaybeUninit::uninit();
             let _ = ffi::goa_manager_call_is_supported_provider_finish(_source_object as *mut _, out_is_supported.as_mut_ptr(), res, &mut error);
             let result = if error.is_null() { Ok(from_glib(out_is_supported.assume_init())) } else { Err(from_glib_full(error)) };
             let callback: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::from_raw(user_data as *mut _);
@@ -116,8 +116,8 @@ pub trait ManagerExt: IsA<Manager> + sealed::Sealed + 'static {
     #[doc(alias = "goa_manager_call_is_supported_provider_sync")]
     fn call_is_supported_provider_sync(&self, arg_provider_type: &str, cancellable: Option<&impl IsA<gio::Cancellable>>) -> Result<bool, glib::Error> {
         unsafe {
-            let mut out_is_supported = mem::MaybeUninit::uninit();
-            let mut error = ptr::null_mut();
+            let mut out_is_supported = std::mem::MaybeUninit::uninit();
+            let mut error = std::ptr::null_mut();
             let is_ok = ffi::goa_manager_call_is_supported_provider_sync(self.as_ref().to_glib_none().0, arg_provider_type.to_glib_none().0, out_is_supported.as_mut_ptr(), cancellable.map(|p| p.as_ref()).to_glib_none().0, &mut error);
             debug_assert_eq!(is_ok == glib::ffi::GFALSE, !error.is_null());
             if error.is_null() { Ok(from_glib(out_is_supported.assume_init())) } else { Err(from_glib_full(error)) }
@@ -148,9 +148,3 @@ pub trait ManagerExt: IsA<Manager> + sealed::Sealed + 'static {
 }
 
 impl<O: IsA<Manager>> ManagerExt for O {}
-
-impl fmt::Display for Manager {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Manager")
-    }
-}

@@ -4,7 +4,7 @@
 // DO NOT EDIT
 
 use glib::{prelude::*,signal::{connect_raw, SignalHandlerId},translate::*};
-use std::{boxed::Box as Box_,fmt,mem,mem::transmute,pin::Pin,ptr};
+use std::{boxed::Box as Box_,pin::Pin};
 
 glib::wrapper! {
     #[doc(alias = "GoaOAuth2Based")]
@@ -51,9 +51,9 @@ pub trait OAuth2BasedExt: IsA<OAuth2Based> + sealed::Sealed + 'static {
         
         let user_data: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::new(glib::thread_guard::ThreadGuard::new(callback));
         unsafe extern "C" fn call_get_access_token_trampoline<P: FnOnce(Result<(glib::GString, i32), glib::Error>) + 'static>(_source_object: *mut glib::gobject_ffi::GObject, res: *mut gio::ffi::GAsyncResult, user_data: glib::ffi::gpointer) {
-            let mut error = ptr::null_mut();
-            let mut out_access_token = ptr::null_mut();
-            let mut out_expires_in = mem::MaybeUninit::uninit();
+            let mut error = std::ptr::null_mut();
+            let mut out_access_token = std::ptr::null_mut();
+            let mut out_expires_in = std::mem::MaybeUninit::uninit();
             let _ = ffi::goa_oauth2_based_call_get_access_token_finish(_source_object as *mut _, &mut out_access_token, out_expires_in.as_mut_ptr(), res, &mut error);
             let result = if error.is_null() { Ok((from_glib_full(out_access_token), out_expires_in.assume_init())) } else { Err(from_glib_full(error)) };
             let callback: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::from_raw(user_data as *mut _);
@@ -82,9 +82,9 @@ pub trait OAuth2BasedExt: IsA<OAuth2Based> + sealed::Sealed + 'static {
     #[doc(alias = "goa_oauth2_based_call_get_access_token_sync")]
     fn call_get_access_token_sync(&self, cancellable: Option<&impl IsA<gio::Cancellable>>) -> Result<(glib::GString, i32), glib::Error> {
         unsafe {
-            let mut out_access_token = ptr::null_mut();
-            let mut out_expires_in = mem::MaybeUninit::uninit();
-            let mut error = ptr::null_mut();
+            let mut out_access_token = std::ptr::null_mut();
+            let mut out_expires_in = std::mem::MaybeUninit::uninit();
+            let mut error = std::ptr::null_mut();
             let is_ok = ffi::goa_oauth2_based_call_get_access_token_sync(self.as_ref().to_glib_none().0, &mut out_access_token, out_expires_in.as_mut_ptr(), cancellable.map(|p| p.as_ref()).to_glib_none().0, &mut error);
             debug_assert_eq!(is_ok == glib::ffi::GFALSE, !error.is_null());
             if error.is_null() { Ok((from_glib_full(out_access_token), out_expires_in.assume_init())) } else { Err(from_glib_full(error)) }
@@ -154,7 +154,7 @@ pub trait OAuth2BasedExt: IsA<OAuth2Based> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::client-id\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_client_id_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_client_id_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -167,15 +167,9 @@ pub trait OAuth2BasedExt: IsA<OAuth2Based> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::client-secret\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_client_secret_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_client_secret_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl<O: IsA<OAuth2Based>> OAuth2BasedExt for O {}
-
-impl fmt::Display for OAuth2Based {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("OAuth2Based")
-    }
-}

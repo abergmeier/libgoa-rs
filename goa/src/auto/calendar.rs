@@ -7,10 +7,9 @@ use glib::{prelude::*};
 #[cfg(feature = "v3_8")]
 #[cfg_attr(docsrs, doc(cfg(feature = "v3_8")))]
 use glib::{signal::{connect_raw, SignalHandlerId},translate::*};
-use std::{fmt};
 #[cfg(feature = "v3_8")]
 #[cfg_attr(docsrs, doc(cfg(feature = "v3_8")))]
-use std::{boxed::Box as Box_,mem::transmute};
+use std::{boxed::Box as Box_};
 
 glib::wrapper! {
     #[doc(alias = "GoaCalendar")]
@@ -100,7 +99,7 @@ pub trait CalendarExt: IsA<Calendar> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::accept-ssl-errors\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_accept_ssl_errors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_accept_ssl_errors_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -115,15 +114,9 @@ pub trait CalendarExt: IsA<Calendar> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::uri\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_uri_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_uri_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl<O: IsA<Calendar>> CalendarExt for O {}
-
-impl fmt::Display for Calendar {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Calendar")
-    }
-}

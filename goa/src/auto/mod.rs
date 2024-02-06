@@ -119,8 +119,7 @@ pub use self::todo::Todo;
 mod enums;
 pub use self::enums::Error;
 
-#[doc(hidden)]
-pub mod traits {
+pub(crate) mod traits {
     pub use super::account::AccountExt;
     pub use super::calendar::CalendarExt;
     pub use super::chat::ChatExt;

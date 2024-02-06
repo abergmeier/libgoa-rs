@@ -4,7 +4,6 @@
 // DO NOT EDIT
 
 use glib::{prelude::*,translate::*};
-use std::{fmt};
 
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash)]
 #[derive(Clone, Copy)]
@@ -25,20 +24,6 @@ pub enum Error {
     Ssl,
 #[doc(hidden)]
     __Unknown(i32),
-}
-
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Error::{}", match *self {
-            Self::Failed => "Failed",
-            Self::NotSupported => "NotSupported",
-            Self::DialogDismissed => "DialogDismissed",
-            Self::AccountExists => "AccountExists",
-            Self::NotAuthorized => "NotAuthorized",
-            Self::Ssl => "Ssl",
-            _ => "Unknown",
-        })
-    }
 }
 
 #[doc(hidden)]
@@ -102,11 +87,12 @@ impl glib::error::ErrorDomain for Error {
 }
 
 impl StaticType for Error {
-    #[inline]
-    fn static_type() -> glib::Type {
-        unsafe { from_glib(ffi::goa_error_get_type()) }
-    }
-}
+                #[inline]
+    #[doc(alias = "goa_error_get_type")]
+   fn static_type() -> glib::Type {
+                    unsafe { from_glib(ffi::goa_error_get_type()) }
+                }
+            }
 
 impl glib::HasParamSpec for Error {
                 type ParamSpec = glib::ParamSpecEnum;
@@ -114,7 +100,7 @@ impl glib::HasParamSpec for Error {
                 type BuilderFn = fn(&str, Self) -> glib::ParamSpecEnumBuilder<Self>;
     
                 fn param_spec_builder() -> Self::BuilderFn {
-                    |name, default_value| Self::ParamSpec::builder_with_default(name, default_value)
+                    Self::ParamSpec::builder_with_default
                 }
 }
 

@@ -4,7 +4,6 @@
 // DO NOT EDIT
 
 use glib::{prelude::*};
-use std::{fmt};
 
 glib::wrapper! {
     #[doc(alias = "GoaChat")]
@@ -38,9 +37,3 @@ mod sealed {
 pub trait ChatExt: IsA<Chat> + sealed::Sealed + 'static {}
 
 impl<O: IsA<Chat>> ChatExt for O {}
-
-impl fmt::Display for Chat {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Chat")
-    }
-}

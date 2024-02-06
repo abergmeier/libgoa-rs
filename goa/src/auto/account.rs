@@ -4,7 +4,7 @@
 // DO NOT EDIT
 
 use glib::{prelude::*,signal::{connect_raw, SignalHandlerId},translate::*};
-use std::{boxed::Box as Box_,fmt,mem,mem::transmute,pin::Pin,ptr};
+use std::{boxed::Box as Box_,pin::Pin};
 
 glib::wrapper! {
     #[doc(alias = "GoaAccount")]
@@ -51,8 +51,8 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         
         let user_data: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::new(glib::thread_guard::ThreadGuard::new(callback));
         unsafe extern "C" fn call_ensure_credentials_trampoline<P: FnOnce(Result<i32, glib::Error>) + 'static>(_source_object: *mut glib::gobject_ffi::GObject, res: *mut gio::ffi::GAsyncResult, user_data: glib::ffi::gpointer) {
-            let mut error = ptr::null_mut();
-            let mut out_expires_in = mem::MaybeUninit::uninit();
+            let mut error = std::ptr::null_mut();
+            let mut out_expires_in = std::mem::MaybeUninit::uninit();
             let _ = ffi::goa_account_call_ensure_credentials_finish(_source_object as *mut _, out_expires_in.as_mut_ptr(), res, &mut error);
             let result = if error.is_null() { Ok(out_expires_in.assume_init()) } else { Err(from_glib_full(error)) };
             let callback: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::from_raw(user_data as *mut _);
@@ -81,8 +81,8 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
     #[doc(alias = "goa_account_call_ensure_credentials_sync")]
     fn call_ensure_credentials_sync(&self, cancellable: Option<&impl IsA<gio::Cancellable>>) -> Result<i32, glib::Error> {
         unsafe {
-            let mut out_expires_in = mem::MaybeUninit::uninit();
-            let mut error = ptr::null_mut();
+            let mut out_expires_in = std::mem::MaybeUninit::uninit();
+            let mut error = std::ptr::null_mut();
             let is_ok = ffi::goa_account_call_ensure_credentials_sync(self.as_ref().to_glib_none().0, out_expires_in.as_mut_ptr(), cancellable.map(|p| p.as_ref()).to_glib_none().0, &mut error);
             debug_assert_eq!(is_ok == glib::ffi::GFALSE, !error.is_null());
             if error.is_null() { Ok(out_expires_in.assume_init()) } else { Err(from_glib_full(error)) }
@@ -104,7 +104,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         
         let user_data: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::new(glib::thread_guard::ThreadGuard::new(callback));
         unsafe extern "C" fn call_remove_trampoline<P: FnOnce(Result<(), glib::Error>) + 'static>(_source_object: *mut glib::gobject_ffi::GObject, res: *mut gio::ffi::GAsyncResult, user_data: glib::ffi::gpointer) {
-            let mut error = ptr::null_mut();
+            let mut error = std::ptr::null_mut();
             let _ = ffi::goa_account_call_remove_finish(_source_object as *mut _, res, &mut error);
             let result = if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) };
             let callback: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::from_raw(user_data as *mut _);
@@ -133,7 +133,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
     #[doc(alias = "goa_account_call_remove_sync")]
     fn call_remove_sync(&self, cancellable: Option<&impl IsA<gio::Cancellable>>) -> Result<(), glib::Error> {
         unsafe {
-            let mut error = ptr::null_mut();
+            let mut error = std::ptr::null_mut();
             let is_ok = ffi::goa_account_call_remove_sync(self.as_ref().to_glib_none().0, cancellable.map(|p| p.as_ref()).to_glib_none().0, &mut error);
             debug_assert_eq!(is_ok == glib::ffi::GFALSE, !error.is_null());
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
@@ -577,7 +577,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::attention-needed\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_attention_needed_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_attention_needed_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -590,7 +590,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::calendar-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_calendar_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_calendar_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -603,7 +603,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::chat-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_chat_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_chat_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -616,7 +616,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::contacts-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_contacts_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_contacts_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -629,7 +629,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::documents-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_documents_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_documents_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -644,7 +644,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::files-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_files_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_files_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -657,7 +657,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::id\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_id_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_id_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -670,7 +670,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::identity\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_identity_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_identity_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -685,7 +685,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::is-locked\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_is_locked_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_is_locked_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -698,7 +698,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::is-temporary\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_is_temporary_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_is_temporary_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -711,7 +711,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::mail-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_mail_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_mail_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -726,7 +726,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::maps-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_maps_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_maps_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -741,7 +741,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::music-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_music_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_music_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -756,7 +756,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::photos-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_photos_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_photos_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -769,7 +769,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::presentation-identity\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_presentation_identity_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_presentation_identity_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -784,7 +784,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::printers-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_printers_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_printers_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -797,7 +797,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::provider-icon\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_provider_icon_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_provider_icon_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -810,7 +810,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::provider-name\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_provider_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_provider_name_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -823,7 +823,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::provider-type\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_provider_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_provider_type_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -838,7 +838,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::read-later-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_read_later_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_read_later_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -853,7 +853,7 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::ticketing-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_ticketing_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_ticketing_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 
@@ -868,15 +868,9 @@ pub trait AccountExt: IsA<Account> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::todo-disabled\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_todo_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_todo_disabled_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl<O: IsA<Account>> AccountExt for O {}
-
-impl fmt::Display for Account {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Account")
-    }
-}

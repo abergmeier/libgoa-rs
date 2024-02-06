@@ -7,10 +7,7 @@ use glib::{prelude::*,translate::*};
 #[cfg(feature = "v3_18")]
 #[cfg_attr(docsrs, doc(cfg(feature = "v3_18")))]
 use glib::{signal::{connect_raw, SignalHandlerId}};
-use std::{boxed::Box as Box_,fmt,pin::Pin,ptr};
-#[cfg(feature = "v3_18")]
-#[cfg_attr(docsrs, doc(cfg(feature = "v3_18")))]
-use std::{mem::transmute};
+use std::{boxed::Box as Box_,pin::Pin};
 
 glib::wrapper! {
     #[doc(alias = "GoaTicketing")]
@@ -57,7 +54,7 @@ pub trait TicketingExt: IsA<Ticketing> + sealed::Sealed + 'static {
         
         let user_data: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::new(glib::thread_guard::ThreadGuard::new(callback));
         unsafe extern "C" fn call_get_ticket_trampoline<P: FnOnce(Result<(), glib::Error>) + 'static>(_source_object: *mut glib::gobject_ffi::GObject, res: *mut gio::ffi::GAsyncResult, user_data: glib::ffi::gpointer) {
-            let mut error = ptr::null_mut();
+            let mut error = std::ptr::null_mut();
             let _ = ffi::goa_ticketing_call_get_ticket_finish(_source_object as *mut _, res, &mut error);
             let result = if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) };
             let callback: Box_<glib::thread_guard::ThreadGuard<P>> = Box_::from_raw(user_data as *mut _);
@@ -86,7 +83,7 @@ pub trait TicketingExt: IsA<Ticketing> + sealed::Sealed + 'static {
     #[doc(alias = "goa_ticketing_call_get_ticket_sync")]
     fn call_get_ticket_sync(&self, cancellable: Option<&impl IsA<gio::Cancellable>>) -> Result<(), glib::Error> {
         unsafe {
-            let mut error = ptr::null_mut();
+            let mut error = std::ptr::null_mut();
             let is_ok = ffi::goa_ticketing_call_get_ticket_sync(self.as_ref().to_glib_none().0, cancellable.map(|p| p.as_ref()).to_glib_none().0, &mut error);
             debug_assert_eq!(is_ok == glib::ffi::GFALSE, !error.is_null());
             if error.is_null() { Ok(()) } else { Err(from_glib_full(error)) }
@@ -138,15 +135,9 @@ pub trait TicketingExt: IsA<Ticketing> + sealed::Sealed + 'static {
         unsafe {
             let f: Box_<F> = Box_::new(f);
             connect_raw(self.as_ptr() as *mut _, b"notify::details\0".as_ptr() as *const _,
-                Some(transmute::<_, unsafe extern "C" fn()>(notify_details_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
+                Some(std::mem::transmute::<_, unsafe extern "C" fn()>(notify_details_trampoline::<Self, F> as *const ())), Box_::into_raw(f))
         }
     }
 }
 
 impl<O: IsA<Ticketing>> TicketingExt for O {}
-
-impl fmt::Display for Ticketing {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("Ticketing")
-    }
-}

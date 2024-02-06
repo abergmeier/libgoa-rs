@@ -4,7 +4,6 @@
 // DO NOT EDIT
 
 use glib::{prelude::*};
-use std::{fmt};
 
 glib::wrapper! {
     #[doc(alias = "GoaReadLater")]
@@ -38,9 +37,3 @@ mod sealed {
 pub trait ReadLaterExt: IsA<ReadLater> + sealed::Sealed + 'static {}
 
 impl<O: IsA<ReadLater>> ReadLaterExt for O {}
-
-impl fmt::Display for ReadLater {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        f.write_str("ReadLater")
-    }
-}
